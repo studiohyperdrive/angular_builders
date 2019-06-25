@@ -1,0 +1,10 @@
+{
+    "$schema": "./node_modules/@angular-devkit/architect/src/builders-schema.json",
+    "builders": {
+        "named-exports": {
+            "implementation": "./lib/builder",
+            "schema": "./lib/schema.json",
+            "description": "Auto generate project index files."
+        }
+    }
+}
