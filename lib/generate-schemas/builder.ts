@@ -1,4 +1,4 @@
-import { BuilderOutput, createBuilder } from '@angular-devkit/build-angular';
+import { BuilderOutput, createBuilder } from '@angular-devkit/architect';
 const glob = require('glob');
 const path = require('path');
 
