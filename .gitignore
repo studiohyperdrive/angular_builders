@@ -14,5 +14,5 @@ node_modules
 
 dist
 
-lib/*/*.d.ts
-lib/*/*.js*
+lib/**/*.d.ts
+lib/**/*.js*
