@@ -12,7 +12,8 @@ export default (filePath: string, dir: string) => new Promise((resolve, reject) 
             expose: 'export',
             topRef: true,
             jsDoc: 'basic',
-            strictTuples: true,
+			strictTuples: true,
+			skipTypeCheck: true, // TODO: re-enable once this is fixed: https://github.com/vega/ts-json-schema-generator/pull/109
         };
 
         const generator = TSG.createGenerator(generatorConfig);
