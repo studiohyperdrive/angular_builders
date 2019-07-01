@@ -1,12 +1,12 @@
 {
 	"builders": {
 		"named-exports": {
-			"implementation": "./lib/named-exports/builder",
+			"class": "./lib/named-exports/builder",
 			"schema": "./lib/named-exports/schema.json",
 			"description": "Auto generate project index files."
 		},
 		"generate-schemas": {
-			"implementation": "./lib/generate-schemas/builder",
+			"class": "./lib/generate-schemas/builder",
 			"schema": "./lib/generate-schemas/schema.json",
 			"description": "Auto generate json schema validators from TypeScript models (AJV compatible)."
 		}

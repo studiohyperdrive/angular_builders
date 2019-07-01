@@ -1,4 +1,10 @@
-import { BuilderOutput, createBuilder } from '@angular-devkit/architect';
+import {
+	Builder,
+	BuilderConfiguration,
+	BuilderContext,
+	BuildEvent,
+} from '@angular-devkit/architect';
+import { Observable, Subject } from 'rxjs';
 const glob = require('glob');
 const path = require('path');
 
@@ -46,34 +52,44 @@ const buildSchemas = (
 	return Promise.all(Object.keys(schemasByDir).map((dir: string) => buildSchemasForDir(dir, schemasByDir[dir], config)))
 };
 
-export default createBuilder((options: Partial<GenerateSchemasConfig>, context) => {
-    const config: GenerateSchemasConfig = {
-        dir: options.dir || process.cwd(),
-        ignore: options.ignore || '*.spec|*.index|test',
-        indent: options.indent || 'space',
-        indentSize: options.indentSize || 2,
-	};
+export default class GenerateSchemasBuilder implements Builder<GenerateSchemasConfig> {
+	constructor(
+		private context: BuilderContext,
+	) {}
 
-    if (options.silent) {
-        config.silent = true;
-	}
+	run(builderConfig: BuilderConfiguration<Partial<GenerateSchemasConfig>>): Observable<BuildEvent> {
+		const config: GenerateSchemasConfig = {
+			dir: builderConfig.options.dir || process.cwd(),
+			ignore: builderConfig.options.ignore || '*.spec|*.index|test',
+			indent: builderConfig.options.indent || 'space',
+			indentSize: builderConfig.options.indentSize || 2,
+		};
 
-	return new Promise<BuilderOutput>((resolve) => {
+		if (builderConfig.options.silent) {
+			config.silent = true;
+		}
+
+		const builder$ = new Subject<BuildEvent>();
+
 		findSchemas(config.dir)
 			.then((schemas: any) => buildSchemas(schemas, config))
 			.then(() => {
-				context.reportStatus('Done');
+				this.context.logger.info("Schemas generated...");
 
-				resolve({
+				builder$.next({
 					success: true,
 				});
+				builder$.complete();
 			})
-			.catch(() => {
-				context.reportStatus('Error');
+			.catch((err) => {
+				this.context.logger.error("Schema generation failed", err);
 
-				resolve({
+				builder$.next({
 					success: false,
 				});
+				builder$.complete();
 			});
-	});
-});
+
+		return builder$;
+	}
+}
