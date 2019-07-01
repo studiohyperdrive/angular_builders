@@ -6,8 +6,8 @@ const path = require('path');
 import { GenerateSchemasConfig } from './types/config';
 
 const compileValidator = (schema: any, type: string, typePath: string, styleOptions: Partial<GenerateSchemasConfig>) => {
-    const validatorTpl = readFileSync(`${process.cwd()}/scripts/validator.tpl.js`, { encoding: 'UTF-8' });
-    const jsonData = Object.keys(schema.definitions[type].properties).reduce((acc, curr, i, arr) => {
+	const validatorTpl = readFileSync(path.join(__dirname, 'validator.tpl'), { encoding: 'UTF-8' });
+	const jsonData = Object.keys(schema.definitions[type].properties).reduce((acc, curr, i, arr) => {
         acc += `${curr}: this.data.${curr},\n`;
 
         if (i === arr.length - 1) {
