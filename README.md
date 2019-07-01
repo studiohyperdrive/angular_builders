@@ -31,12 +31,13 @@ Use the builder in your build targets:
         "architect": {
             ...
             "named-exports": {
-            "builder": "@tom-odb/angular-builders:named-exports",
-            "options": {
-                "dir": "src",
-                "indent": "space",
-                "indentSize": 4,
-                "ignore": "*.spec.ts"
+                "builder": "@tom-odb/angular-builders:named-exports",
+                "options": {
+                    "dir": "src",
+                    "indent": "space",
+                    "indentSize": 4,
+                    "ignore": "*.spec.ts"
+                }
             }
         }
     }
@@ -69,12 +70,13 @@ Use the builder in your build targets:
         ...
         "architect": {
             ...
-            "named-exports": {
-            "builder": "@tom-odb/angular-builders:generate-schemas",
-            "options": {
-                "dir": "src",
-                "indent": "space",
-                "indentSize": 4
+            "generate-schemas": {
+                "builder": "@tom-odb/angular-builders:generate-schemas",
+                "options": {
+                    "dir": "src",
+                    "indent": "space",
+                    "indentSize": 4
+                }
             }
         }
     }
