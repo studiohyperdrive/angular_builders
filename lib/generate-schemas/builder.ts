@@ -60,7 +60,7 @@ export default class GenerateSchemasBuilder implements Builder<GenerateSchemasCo
 	run(builderConfig: BuilderConfiguration<Partial<GenerateSchemasConfig>>): Observable<BuildEvent> {
 		const config: GenerateSchemasConfig = {
 			dir: builderConfig.options.dir || process.cwd(),
-			ignore: builderConfig.options.ignore || '*.spec|*.index|test',
+			ignore: builderConfig.options.ignore || '*.spec|*.index|test', // TODO: implement this
 			indent: builderConfig.options.indent || 'space',
 			indentSize: builderConfig.options.indentSize || 2,
 		};
