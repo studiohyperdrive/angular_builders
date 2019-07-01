@@ -1,6 +1,6 @@
 {
-  "name": "@tom-odb/named-exports-builder",
-  "version": "1.0.0",
+  "name": "@tom-odb/angular-builders",
+  "version": "0.0.0",
   "description": "",
   "main": "lib/builder.js",
   "builders": "builders.json",
@@ -10,17 +10,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tom-odb/named-exports_angular_builder.git"
+    "url": "git+https://github.com/tom-odb/angular_builders.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tom-odb/named-exports_angular_builder/issues"
+    "url": "https://github.com/tom-odb/angular_builders/issues"
   },
-  "homepage": "https://github.com/tom-odb/named-exports_angular_builder#readme",
+  "homepage": "https://github.com/tom-odb/angular_builders#readme",
   "dependencies": {
-    "@angular-devkit/architect": "^0.800.4",
-    "@tom-odb/named-exports": "^1.4.3"
+    "@angular-devkit/architect": "^0.800.6",
+    "@tom-odb/named-exports": "^1.4.3",
+    "glob": "^7.1.4",
+    "js-beautify": "^1.10.0",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.lowercase": "^4.3.0",
+    "lodash.tostring": "^4.1.4",
+    "lodash.upperfirst": "^4.3.1",
+    "make-dir": "^3.0.0",
+    "rimraf": "^2.6.3",
+    "ts-json-schema-generator": "^0.50.2",
+    "yargs": "^13.2.4"
   },
   "devDependencies": {
     "@types/jasmine": "^3.3.12",

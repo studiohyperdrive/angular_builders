@@ -1,0 +1,1 @@
+{"version":3,"file":"to-upper-camelcase.js","sourceRoot":"","sources":["to-upper-camelcase.ts"],"names":[],"mappings":";;AAAA,MAAM,SAAS,GAAG,OAAO,CAAC,kBAAkB,CAAC,CAAC;AAC9C,MAAM,QAAQ,GAAG,OAAO,CAAC,iBAAiB,CAAC,CAAC;AAC5C,MAAM,UAAU,GAAG,OAAO,CAAC,mBAAmB,CAAC,CAAC;AAEhD,kBAAe,CAAC,GAAQ,EAAE,EAAE,CAAC,UAAU,CAAC,SAAS,CAAC,QAAQ,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC"}
