@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/tom-odb/angular_builders#readme",
   "dependencies": {
-    "@angular-devkit/architect": "^0.800.6",
+    "@angular-devkit/architect": "0.800.3",
     "@tom-odb/named-exports": "^1.4.3",
     "glob": "^7.1.4",
     "js-beautify": "^1.10.0",
