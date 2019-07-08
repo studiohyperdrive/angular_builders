@@ -11,7 +11,7 @@ export default (filePath: string, dir: string) => new Promise((resolve, reject) 
             path: path.join(dir, 'types', filePath),
             expose: 'export',
             topRef: true,
-            jsDoc: 'basic',
+            jsDoc: 'extended',
 			strictTuples: true,
 			skipTypeCheck: true, // TODO: re-enable once this is fixed: https://github.com/vega/ts-json-schema-generator/pull/109
         };

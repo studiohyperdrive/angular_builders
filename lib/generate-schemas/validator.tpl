@@ -10,7 +10,14 @@ export class <%= type %>Schema implements ValidatorSchemaConstruct {
 
 	constructor(data: any) {
 	this.data = data;
-		this.ajv = new AJV();
+		this.ajv = new AJV({
+			allErrors: true,
+			coerceTypes: true,
+			nullable: true,
+			ownProperties: true,
+			removeAdditional: 'failing',
+			useDefaults: true,
+		});
 	}
 
 	public validate(data: any): AJV.ErrorObject | boolean {
