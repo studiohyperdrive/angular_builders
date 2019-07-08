@@ -1,26 +1,15 @@
 import * as AJV from 'ajv';
 import { <%= type %> } from '<%= typePath %>';
+import { ValidatorSchema, ValidatorSchemaConstruct } from '@tom-odb/angular-builders';
 
-export class <%= type %>Schema {
-	public schema: {
-		$schema: string;
-		$ref?: string;
-		definitions: {
-			[key: string]: {
-				type: string;
-				properties?: any;
-			} | {
-				$ref: string;
-			} | any;
-		};
-		errors?: AJV.ErrorObject;
-  } =<%= schema %>;
+export class <%= type %>Schema implements ValidatorSchemaConstruct {
+  public schema: ValidatorSchema =<%= schema %>;
 
   private ajv: any;
   private data: <%= type %>;
 
 	constructor(data: any) {
-    this.data = data;
+	this.data = data;
 		this.ajv = new AJV();
 	}
 
