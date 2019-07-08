@@ -1,6 +1,6 @@
 import * as AJV from 'ajv';
 import { <%= type %> } from '<%= typePath %>';
-import { ValidatorSchema, ValidatorSchemaConstruct } from '@tom-odb/angular-builders';
+import { ValidatorSchema, ValidatorSchemaConstruct, ValidatorSchemaResult } from '@tom-odb/angular-builders';
 
 export class <%= type %>Schema implements ValidatorSchemaConstruct {
   public schema: ValidatorSchema =<%= schema %>;
@@ -20,18 +20,24 @@ export class <%= type %>Schema implements ValidatorSchemaConstruct {
 		});
 	}
 
-	public validate(data: any): AJV.ErrorObject | boolean {
+	public validate(data: any): ValidatorSchemaResult<<%= type %>> {
 		const validated = this.ajv.validate(this.schema, data);
 
 		if (!validated) {
-			return this.schema.errors;
+			return {
+				errors: this.ajv.errors,
+				result: null,
+			};
 		}
 
-		return validated;
+		return {
+			errors: [],
+			result: validated,
+		};
   }
 
   public toJSON(): <%= type %> {
-    if (!this.data || !this.validate(this.data)) {
+    if (!this.data || this.validate(this.data).errors.length > 0) {
       return null;
     }
 
