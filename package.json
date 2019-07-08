@@ -1,6 +1,6 @@
 {
   "name": "@tom-odb/angular-builders",
-  "version": "0.0.1-5",
+  "version": "0.0.1-6",
   "description": "",
   "main": "lib/builder.js",
   "builders": "builders.json",
