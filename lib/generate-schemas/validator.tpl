@@ -1,7 +1,7 @@
 import * as AJV from 'ajv';
-import { {{ TYPE }} } from '{{ TYPE_PATH }}';
+import { <%= type %> } from '<%= typePath %>';
 
-export class {{ TYPE }}Schema {
+export class <%= type %>Schema {
 	public schema: {
 		$schema: string;
 		$ref?: string;
@@ -14,10 +14,10 @@ export class {{ TYPE }}Schema {
 			} | any;
 		};
 		errors?: AJV.ErrorObject;
-  } ={{ SCHEMA }};
+  } =<%= schema %>;
 
   private ajv: any;
-  private data: {{ TYPE }};
+  private data: <%= type %>;
 
 	constructor(data: any) {
     this.data = data;
@@ -34,11 +34,11 @@ export class {{ TYPE }}Schema {
 		return validated;
   }
 
-  public toJSON(): {{ TYPE }} {
+  public toJSON(): <%= type %> {
     if (!this.data || !this.validate(this.data)) {
       return null;
     }
 
-    return {{ JSON }};
+    return <%= jsonData %>;
   }
 }

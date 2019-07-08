@@ -82,7 +82,8 @@ export default class GenerateSchemasBuilder implements Builder<GenerateSchemasCo
 				builder$.complete();
 			})
 			.catch((err) => {
-				this.context.logger.error("Schema generation failed", err);
+				this.context.logger.error("Schema generation failed");
+				this.context.logger.error(err);
 
 				builder$.next({
 					success: false,

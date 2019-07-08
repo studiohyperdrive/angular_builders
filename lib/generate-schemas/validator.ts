@@ -1,4 +1,5 @@
 const kebabCase = require('lodash.kebabcase');
+const template = require('lodash.template');
 const { readFileSync, writeFileSync } = require('fs');
 const { js: beautify } = require('js-beautify');
 const path = require('path');
@@ -15,18 +16,18 @@ const compileValidator = (schema: any, type: string, typePath: string, styleOpti
         }
 
         return acc;
-    }, '{\n');
-
-    const result = validatorTpl
-        .replace(/\{\{ TYPE }}/g, type)
-        .replace('{{ TYPE_PATH }}', typePath)
-        .replace('{{ JSON }}', jsonData)
-        .replace('{{ SCHEMA }}', `
-        // tslint:disable
+	}, '{\n');
+	const compiler = template(validatorTpl);
+	const result = compiler({
+		type,
+		typePath,
+		jsonData,
+		schema: `
+		// tslint:disable
         ${JSON.stringify(schema, null, 2)}
         // tslint:enable
-        `
-        );
+		`
+	});
 
     return beautify(result, {
         indent_size: styleOptions.indentSize || 2,
