@@ -1,4 +1,4 @@
-const lowerCase = require('lodash.lowercase');
+const kebabCase = require('lodash.kebabcase');
 const { readFileSync, writeFileSync } = require('fs');
 const { js: beautify } = require('js-beautify');
 const path = require('path');
@@ -42,10 +42,10 @@ export default (
 	styleOptions: Partial<GenerateSchemasConfig>,
 ) => new Promise((resolve, reject) => {
     try {
-		// TODO: fix file name
-        const template = compileValidator(schema, type, path.join('..', 'types', `${lowerCase(type)}.model`), styleOptions);
+		const typePath = kebabCase(type);
+        const template = compileValidator(schema, type, path.join('..', 'types', `${typePath}.model`), styleOptions);
 
-        writeFileSync(`${outputPath}/schemas/${lowerCase(type || 'schema')}.ts`, template);
+        writeFileSync(`${outputPath}/schemas/${type ? typePath : 'schema'}.schema.ts`, template);
 
         resolve();
     } catch (e) {
