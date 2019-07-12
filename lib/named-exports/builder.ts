@@ -6,6 +6,7 @@ import {
 } from '@angular-devkit/architect';
 import { Observable, Subject } from 'rxjs';
 import * as childProcess from 'child_process';
+import { join as pathJoin } from 'path';
 
 import { NamedExportsConfig } from './types/config';
 
@@ -36,7 +37,7 @@ export default class NamedExportsBuilder implements Builder<NamedExportsConfig> 
 		], []);
 
 		const spawn = childProcess.spawn(
-			'./node_modules/.bin/named-exports',
+			pathJoin('node_modules', '.bin', 'named-exports'),
 			args,
 			{ stdio: 'pipe' }
 		);
