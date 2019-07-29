@@ -18,7 +18,7 @@ yarn add @tom-odb/angular-builders
 
 This builder generates named exports for the build target using the [`@tom-odb/named-exports`](https://github.com/tom-odb/named-exports) package.
 
-## Usage
+### Usage
 
 Use the builder in your build targets:
 
@@ -58,7 +58,7 @@ Some restrictions:
 * models have to have the `.model.ts` extension
 * schemas will be generated to the `schemas` folder, next to the original `types` folder (if the folder does not exist it will be created)
 
-## Usage
+### Usage
 
 Use the builder in your build targets:
 
@@ -75,7 +75,8 @@ Use the builder in your build targets:
                 "options": {
                     "dir": "src",
                     "indent": "space",
-                    "indentSize": 4
+                    "indentSize": 4,
+                    "tsconfig": "path/to/tsconfig.json"
                 }
             }
         }

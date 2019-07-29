@@ -4,7 +4,7 @@ export interface GenerateSchemasConfig {
     indent: string;
     indentSize: number;
     silent?: boolean;
-	tsConfig?: string;
+	tsconfig?: string;
 	skipTypeCheck?: boolean;
 	strictTuples?: boolean;
 	expose?: string;
