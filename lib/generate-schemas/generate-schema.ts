@@ -8,7 +8,7 @@ export default (filePath: string, dir: string, options: Partial<GenerateSchemasC
     try {
         const type = toUpperCamelcase(filePath.replace(/\.model\.ts$/, ''));
         const generatorConfig = {
-			config: options.tsconfig || path.join(process.cwd(), 'tsconfig.json'),
+			tsconfig: options.tsconfig || path.join(process.cwd(), 'tsconfig.json'),
 			skipTypeCheck: options.skipTypeCheck || true, // TODO: re-enable once this is fixed: https://github.com/vega/ts-json-schema-generator/pull/109
 			strictTuples: options.strictTuples || true,
             expose: options.expose || 'export',
