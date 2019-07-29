@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "ts-node node_modules/jasmine/bin/jasmine lib/builder.spec.ts"
+    "test": "ts-node node_modules/jasmine/bin/jasmine lib/**/*.spec.ts"
   },
   "repository": {
     "type": "git",
