@@ -2,18 +2,20 @@ const TSG = require('ts-json-schema-generator');
 const path = require('path');
 
 import toUpperCamelcase from "../utils/to-upper-camelcase";
+import { GenerateSchemasConfig } from "./types/config";
 
-export default (filePath: string, dir: string) => new Promise((resolve, reject) => {
+export default (filePath: string, dir: string, options: Partial<GenerateSchemasConfig>) => new Promise((resolve, reject) => {
     try {
         const type = toUpperCamelcase(filePath.replace(/\.model\.ts$/, ''));
         const generatorConfig = {
-            type,
+			config: options.tsConfig || path.join(process.cwd(), 'tsconfig.json'),
+			skipTypeCheck: options.skipTypeCheck || true, // TODO: re-enable once this is fixed: https://github.com/vega/ts-json-schema-generator/pull/109
+			strictTuples: options.strictTuples || true,
+            expose: options.expose || 'export',
+            jsDoc: options.jsDoc || 'extended',
             path: path.join(dir, 'types', filePath),
-            expose: 'export',
-            topRef: true,
-            jsDoc: 'extended',
-			strictTuples: true,
-			skipTypeCheck: true, // TODO: re-enable once this is fixed: https://github.com/vega/ts-json-schema-generator/pull/109
+            topRef: options.topRef || true,
+            type,
         };
 
         const generator = TSG.createGenerator(generatorConfig);

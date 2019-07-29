@@ -34,12 +34,12 @@ const findSchemas = (dir: string) => new Promise((resolve, reject) => {
     });
 });
 
-const buildSchemasForDir = (dir: string, schemas: string[], styleOptions: Partial<GenerateSchemasConfig>) => {
+const buildSchemasForDir = (dir: string, schemas: string[], options: Partial<GenerateSchemasConfig>) => {
     return cleanup(path.join(dir, 'schemas'))
         .then(() => verifyOutput(path.join(dir, 'schemas')))
         .then(() => Promise.all(schemas.map((filePath => {
-            return generateSchema(filePath, dir)
-                .then(({ schema, type }) => createValidator(dir, schema, type, styleOptions));
+            return generateSchema(filePath, dir, options)
+                .then(({ schema, type }) => createValidator(dir, schema, type, options));
         }))));
 };
 
@@ -63,6 +63,7 @@ export default class GenerateSchemasBuilder implements Builder<GenerateSchemasCo
 			ignore: builderConfig.options.ignore || '*.spec|*.index|test', // TODO: implement this
 			indent: builderConfig.options.indent || 'space',
 			indentSize: builderConfig.options.indentSize || 2,
+			tsConfig: builderConfig.options.tsConfig || path.join(process.cwd(), 'tsconfig.json'),
 		};
 
 		if (builderConfig.options.silent) {
