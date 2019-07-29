@@ -63,7 +63,7 @@ export default class GenerateSchemasBuilder implements Builder<GenerateSchemasCo
 			ignore: builderConfig.options.ignore || '*.spec|*.index|test', // TODO: implement this
 			indent: builderConfig.options.indent || 'space',
 			indentSize: builderConfig.options.indentSize || 2,
-			tsconfig: builderConfig.options as string, // verified in generate-schema
+			tsconfig: builderConfig.options.tsconfig, // verified in generate-schema
 		};
 
 		if (builderConfig.options.silent) {
