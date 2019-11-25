@@ -46,6 +46,40 @@ Use the builder in your build targets:
 
 For available options, see [`@tom-odb/named-exports`](https://github.com/tom-odb/named-exports#options).
 
+## @tom-odb/angular-builder:build-library
+
+This builder runs the `ng build` command with support for auto-generated export files using the `named-exports` package described above.
+
+### Usage
+
+Use the builder in your build targets like you would the standard library builder, adding options for the `named-exports` builder under the `index` property:
+
+```json
+{
+  ...
+  "projects": {
+    "demo": {
+        ...
+        "architect": {
+            ...
+            "build": {
+                "builder": "@tom-odb/angular-builders:builder-library",
+                "options": {
+                    "tsConfig": "projects/demo/tsconfig.lib.json",
+                    "project": "projects/demo/ng-package.json",
+                    "index": {
+                        "dir": "projects/demo/src",
+                        "fileName": "public-api"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+For available options, see [`@tom-odb/named-exports`](https://github.com/tom-odb/named-exports#options).
+
 ## @tom-odb/angular-builder:generate-schemas
 
 This builder generates validator classes for all models (*.model.ts) in the build target.
