@@ -52,7 +52,7 @@ This builder runs the `ng build` command with support for auto-generated export 
 
 ### Usage
 
-Use the builder in your build targets like you would the standard library builder, adding options for the `named-exports` builder under the `index` property:
+Use the builder in your build targets like you would the standard library builder, adding options for the `named-exports` builder under the `namedExports` property:
 
 ```json
 {
@@ -67,7 +67,7 @@ Use the builder in your build targets like you would the standard library builde
                 "options": {
                     "tsConfig": "projects/demo/tsconfig.lib.json",
                     "project": "projects/demo/ng-package.json",
-                    "index": {
+                    "namedExports": {
                         "dir": "projects/demo/src",
                         "fileName": "public-api"
                     }

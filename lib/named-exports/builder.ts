@@ -7,23 +7,14 @@ import { Observable } from 'rxjs';
 import * as childProcess from 'child_process';
 import { join as pathJoin } from 'path';
 
+import { parseOptions} from './parse-options';
 import { NamedExportsConfig } from './types/config';
 
 export const namedExportsBuilder = (
 	options: NamedExportsConfig,
 	context: BuilderContext,
 ): Observable<BuilderOutput> => {
-	const config: NamedExportsConfig = {
-		dir: options.dir || process.cwd(),
-		ignore: options.ignore || '*.spec|*.index|test',
-		fileName: options.fileName || 'index',
-		indent: options.indent || 'space',
-		indentSize: options.indentSize || 2,
-	};
-
-	if (options.silent) {
-		config.silent = true;
-	}
+	const config: NamedExportsConfig = parseOptions(options) as NamedExportsConfig;
 
 	return new Observable((builder$) => {
 		const args: string[] = Object.keys(config).reduce((acc: string[], key: string): string[] => [

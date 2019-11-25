@@ -27,7 +27,7 @@
   "dependencies": {
     "@angular-devkit/architect": "^0.803.0",
     "@angular-devkit/build-ng-packagr": "^0.803.19",
-    "@tom-odb/named-exports": "^1.4.3",
+    "@tom-odb/named-exports": "^1.4.5",
     "glob": "^7.1.4",
     "js-beautify": "^1.10.0",
     "lodash.camelcase": "^4.3.0",
