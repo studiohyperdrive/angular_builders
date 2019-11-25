@@ -2,13 +2,17 @@
   "name": "@tom-odb/angular-builders",
   "version": "0.0.1-14",
   "description": "",
-  "main": "lib/builder.js",
+  "files": [
+    "lib",
+    "builders.json"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "builders": "builders.json",
-  "types": "builders.d.ts",
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "ts-node node_modules/jasmine/bin/jasmine lib/**/*.spec.ts"
+    "test": "ts-node --project ./tsconfig.spec.json node_modules/jasmine/bin/jasmine lib/**/*.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -21,13 +25,14 @@
   },
   "homepage": "https://github.com/tom-odb/angular_builders#readme",
   "dependencies": {
-    "@angular-devkit/architect": "0.13.9",
-    "@tom-odb/named-exports": "^1.4.3",
+    "@angular-devkit/architect": "^0.803.0",
+    "@angular-devkit/build-ng-packagr": "^0.803.19",
+    "@tom-odb/named-exports": "^1.4.5",
     "glob": "^7.1.4",
     "js-beautify": "^1.10.0",
     "lodash.camelcase": "^4.3.0",
-    "lodash.lowercase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
+    "lodash.lowercase": "^4.3.0",
     "lodash.template": "^4.4.0",
     "lodash.tostring": "^4.1.4",
     "lodash.upperfirst": "^4.3.1",
@@ -40,7 +45,7 @@
     "@types/jasmine": "^3.3.12",
     "@types/node": "^11.13.4",
     "jasmine": "^3.4.0",
-    "jasmine-node": "^1.16.2",
+    "jasmine-node": "^3.0.0",
     "rxjs": "6.3.3",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.3"

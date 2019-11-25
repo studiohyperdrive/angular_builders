@@ -1,14 +1,20 @@
 {
+	"$schema": "./node_modules/@angular-devkit/architect/src/builders-schema.json",
 	"builders": {
 		"named-exports": {
-			"class": "./lib/named-exports/builder",
+			"implementation": "./lib/named-exports/builder",
 			"schema": "./lib/named-exports/schema.json",
 			"description": "Auto generate project index files."
 		},
 		"generate-schemas": {
-			"class": "./lib/generate-schemas/builder",
+			"implementation": "./lib/generate-schemas/builder",
 			"schema": "./lib/generate-schemas/schema.json",
 			"description": "Auto generate json schema validators from TypeScript models (AJV compatible)."
+		},
+		"build-library": {
+			"implementation": "./lib/build-library/builder",
+			"schema": "./lib/build-library/schema.json",
+			"description": "Build library with named exports option."
 		}
 	}
 }

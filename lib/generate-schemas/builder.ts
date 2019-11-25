@@ -1,10 +1,9 @@
 import {
-	Builder,
-	BuilderConfiguration,
 	BuilderContext,
-	BuildEvent,
+	BuilderOutput,
+	createBuilder,
 } from '@angular-devkit/architect';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 const glob = require('glob');
 const path = require('path');
 
@@ -52,30 +51,27 @@ const buildSchemas = (
 	return Promise.all(Object.keys(schemasByDir).map((dir: string) => buildSchemasForDir(dir, schemasByDir[dir], config)))
 };
 
-export default class GenerateSchemasBuilder implements Builder<GenerateSchemasConfig> {
-	constructor(
-		private context: BuilderContext,
-	) {}
+export const generateSchemasBuilder = (
+	options: GenerateSchemasConfig,
+	context: BuilderContext,
+): Observable<BuilderOutput> => {
+	const config: GenerateSchemasConfig = {
+		dir: options.dir || process.cwd(),
+		ignore: options.ignore || '*.spec|*.index|test', // TODO: implement this
+		indent: options.indent || 'space',
+		indentSize: options.indentSize || 2,
+		tsconfig: options.tsconfig, // verified in generate-schema
+	};
 
-	run(builderConfig: BuilderConfiguration<Partial<GenerateSchemasConfig>>): Observable<BuildEvent> {
-		const config: GenerateSchemasConfig = {
-			dir: builderConfig.options.dir || process.cwd(),
-			ignore: builderConfig.options.ignore || '*.spec|*.index|test', // TODO: implement this
-			indent: builderConfig.options.indent || 'space',
-			indentSize: builderConfig.options.indentSize || 2,
-			tsconfig: builderConfig.options.tsconfig, // verified in generate-schema
-		};
+	if (options.silent) {
+		config.silent = true;
+	}
 
-		if (builderConfig.options.silent) {
-			config.silent = true;
-		}
-
-		const builder$ = new Subject<BuildEvent>();
-
+	return new Observable((builder$) => {
 		findSchemas(config.dir)
 			.then((schemas: any) => buildSchemas(schemas, config))
 			.then(() => {
-				this.context.logger.info("Schemas generated...");
+				context.logger.info("Schemas generated...");
 
 				builder$.next({
 					success: true,
@@ -83,15 +79,15 @@ export default class GenerateSchemasBuilder implements Builder<GenerateSchemasCo
 				builder$.complete();
 			})
 			.catch((err) => {
-				this.context.logger.error("Schema generation failed");
-				this.context.logger.error(typeof err === 'string' ? err : err.message);
+				context.logger.error("Schema generation failed");
+				context.logger.error(typeof err === 'string' ? err : err.message);
 
 				builder$.next({
 					success: false,
 				});
 				builder$.complete();
 			});
+	});
+};
 
-		return builder$;
-	}
-}
+export default createBuilder(generateSchemasBuilder as any);

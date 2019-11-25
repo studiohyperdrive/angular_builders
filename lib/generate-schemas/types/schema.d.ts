@@ -14,10 +14,10 @@ export interface ValidatorSchema {
 	errors?: AJV.ErrorObject;
 }
 
-export class ValidatorSchemaConstruct<T = any> {
+export interface ValidatorSchemaConstruct<T = any> {
 	schema: ValidatorSchema;
 
-	constructor(data: any);
+	constructor(data: any): void;
 
 	validate(data: any): ValidatorSchemaResult<T>;
 	toJSON(): T;

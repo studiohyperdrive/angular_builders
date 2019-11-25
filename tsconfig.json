@@ -10,16 +10,18 @@
         "noImplicitAny": true,
         "noImplicitThis": true,
         "noUnusedParameters": true,
-        "noUnusedLocals": true,
+		"noUnusedLocals": true,
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
         "sourceMap": true,
         "strictNullChecks": true,
         "types": [
             "node",
-            "jasmine"
         ]
-    },
+	},
+	"include": [
+		"lib/**/*.ts"
+	],
     "exclude": [
         "**/*.spec.ts"
     ]

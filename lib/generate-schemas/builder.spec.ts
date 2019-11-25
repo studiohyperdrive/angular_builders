@@ -5,7 +5,7 @@ import { schema } from '@angular-devkit/core';
 const { join } = require('path');
 
 describe('Named exports Builder', () => {
-    // let architect: Architect;
+    let architect: Architect;
     let architectHost: TestingArchitectHost;
 
     beforeEach(async () => {
@@ -19,7 +19,7 @@ describe('Named exports Builder', () => {
 
         // This will either take a Node package name, or a path to the directory
         // for the package.json file.
-        await architectHost.addBuilderFromPackage(join(__dirname, '..'));
+        await architectHost.addBuilderFromPackage(join(__dirname, '..', '..'));
         console.log('#', Array.from((architectHost as any)._builderMap.keys()))
     });
 
