@@ -9,7 +9,7 @@ import { join as pathJoin } from 'path';
 
 import { NamedExportsConfig } from './types/config';
 
-export const namedExports = (
+export const namedExportsBuilder = (
 	options: NamedExportsConfig,
 	context: BuilderContext,
 ): Observable<BuilderOutput> => {
@@ -53,4 +53,4 @@ export const namedExports = (
 	});
 };
 
-export default createBuilder(namedExports as any);
+export default createBuilder(namedExportsBuilder as any);

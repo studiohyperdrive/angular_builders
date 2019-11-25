@@ -2,9 +2,13 @@
   "name": "@tom-odb/angular-builders",
   "version": "0.0.1-14",
   "description": "",
-  "main": "lib/builder.js",
+  "files": [
+    "lib",
+    "builders.json"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "builders": "builders.json",
-  "types": "builders.d.ts",
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",

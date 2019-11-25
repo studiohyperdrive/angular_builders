@@ -51,7 +51,7 @@ const buildSchemas = (
 	return Promise.all(Object.keys(schemasByDir).map((dir: string) => buildSchemasForDir(dir, schemasByDir[dir], config)))
 };
 
-export const generateSchemas = (
+export const generateSchemasBuilder = (
 	options: GenerateSchemasConfig,
 	context: BuilderContext,
 ): Observable<BuilderOutput> => {
@@ -90,4 +90,4 @@ export const generateSchemas = (
 	});
 };
 
-export default createBuilder(generateSchemas as any);
+export default createBuilder(generateSchemasBuilder as any);

@@ -1,5 +1,4 @@
 .*
-tsconfig.json
+tsconfig*.json
 lib/**/*.ts
 !lib/**/*.d.ts
-!lib/**/types/*.ts
