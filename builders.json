@@ -10,6 +10,11 @@
 			"implementation": "./lib/generate-schemas/builder",
 			"schema": "./lib/generate-schemas/schema.json",
 			"description": "Auto generate json schema validators from TypeScript models (AJV compatible)."
+		},
+		"build-library": {
+			"implementation": "./lib/build-library/builder",
+			"schema": "./lib/build-library/schema.json",
+			"description": "Build library with named exports option."
 		}
 	}
 }
