@@ -1,35 +1,31 @@
 import {
-	Builder,
-	BuilderConfiguration,
 	BuilderContext,
-	BuildEvent,
+	BuilderOutput,
+	createBuilder,
 } from '@angular-devkit/architect';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import * as childProcess from 'child_process';
 import { join as pathJoin } from 'path';
 
 import { NamedExportsConfig } from './types/config';
 
-export default class NamedExportsBuilder implements Builder<NamedExportsConfig> {
-	constructor(
-		private context: BuilderContext,
-	) { }
+export const namedExports = (
+	options: NamedExportsConfig,
+	context: BuilderContext,
+): Observable<BuilderOutput> => {
+	const config: NamedExportsConfig = {
+		dir: options.dir || process.cwd(),
+		ignore: options.ignore || '*.spec|*.index|test',
+		fileName: options.fileName || 'index',
+		indent: options.indent || 'space',
+		indentSize: options.indentSize || 2,
+	};
 
-	run(builderConfig: BuilderConfiguration<Partial<NamedExportsConfig>>): Observable<BuildEvent> {
-		const config: NamedExportsConfig = {
-			dir: builderConfig.options.dir || process.cwd(),
-			ignore: builderConfig.options.ignore || '*.spec|*.index|test',
-			fileName: builderConfig.options.fileName || 'index',
-			indent: builderConfig.options.indent || 'space',
-			indentSize: builderConfig.options.indentSize || 2,
-		};
+	if (options.silent) {
+		config.silent = true;
+	}
 
-		if (builderConfig.options.silent) {
-			config.silent = true;
-		}
-
-		const builder$ = new Subject<BuildEvent>();
-
+	return new Observable((builder$) => {
 		const args: string[] = Object.keys(config).reduce((acc: string[], key: string): string[] => [
 			...acc,
 			`--${key}`,
@@ -43,17 +39,18 @@ export default class NamedExportsBuilder implements Builder<NamedExportsConfig> 
 		);
 
 		spawn.stdout.on('data', (data: any) => {
-			this.context.logger.info(data.toString());
+			context.logger.info(data.toString());
 		});
 
 		spawn.stderr.on('data', (data: any) => {
-			this.context.logger.error(data.toString());
+			context.logger.error(data.toString());
 		});
 
 		spawn.on('close', (code: number) => {
 			builder$.next({ success: code === 0 });
+			builder$.complete();
 		});
+	});
+};
 
-		return builder$;
-	}
-}
+export default createBuilder(namedExports as any);
