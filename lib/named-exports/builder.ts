@@ -4,7 +4,7 @@ import {
 	createBuilder,
 } from '@angular-devkit/architect';
 import { Observable } from 'rxjs';
-import * as childProcess from 'child_process';
+import spawnChild from 'cross-spawn';
 import { join as pathJoin } from 'path';
 
 import { parseOptions} from './parse-options';
@@ -23,19 +23,23 @@ export const namedExportsBuilder = (
 			(config as any)[key].toString(),
 		], []);
 
-		const spawn = childProcess.spawn(
+		const spawn = spawnChild(
 			pathJoin('node_modules', '.bin', 'named-exports'),
 			args,
 			{ stdio: 'pipe' }
 		);
 
-		spawn.stdout.on('data', (data: any) => {
-			context.logger.info(data.toString());
-		});
+		if (spawn.stdout) {
+			spawn.stdout.on('data', (data: any) => {
+				context.logger.info(data.toString());
+			});
+		}
 
-		spawn.stderr.on('data', (data: any) => {
-			context.logger.error(data.toString());
-		});
+		if (spawn.stderr) {
+			spawn.stderr.on('data', (data: any) => {
+				context.logger.error(data.toString());
+			});
+		}
 
 		spawn.on('close', (code: number) => {
 			builder$.next({ success: code === 0 });
