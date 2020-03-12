@@ -25,8 +25,8 @@
   },
   "homepage": "https://github.com/tom-odb/angular_builders#readme",
   "dependencies": {
-    "@angular-devkit/architect": "^0.803.0",
-    "@angular-devkit/build-ng-packagr": "^0.803.19",
+    "@angular-devkit/architect": "0.900.6",
+    "@angular-devkit/build-ng-packagr": "0.900.6",
     "@tom-odb/named-exports": "^1.4.6",
     "@types/cross-spawn": "^6.0.1",
     "cross-spawn": "^7.0.1",
