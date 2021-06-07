@@ -34,6 +34,7 @@ fs.writeFileSync(path.resolve(process.cwd(), 'dist', 'package.json'), JSON.strin
 	dependencies,
 }, null, 2), { encoding: 'UTF-8' });
 
-cpx.copySync(path.resolve(process.cwd(), 'builders.md'), path.resolve(process.cwd(), 'dist'));
+cpx.copySync(path.resolve(process.cwd(), 'builders.json'), path.resolve(process.cwd(), 'dist'));
 cpx.copySync(path.resolve(process.cwd(), 'LICENSE.md'), path.resolve(process.cwd(), 'dist'));
 cpx.copySync(path.resolve(process.cwd(), 'README.md'), path.resolve(process.cwd(), 'dist'));
+cpx.copySync(path.resolve(process.cwd(), 'lib', '**', 'schema.json'), path.resolve(process.cwd(), 'dist', 'lib'));
