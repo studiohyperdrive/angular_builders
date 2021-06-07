@@ -1,5 +1,5 @@
 {
-  "name": "@tom-odb/angular-builders",
+  "name": "@studiohyperdrive/angular-builders",
   "version": "1.0.3",
   "description": "",
   "files": [
@@ -10,24 +10,26 @@
   "types": "lib/index.d.ts",
   "builders": "builders.json",
   "scripts": {
+    "prebuild": "rimraf \"./dist\"",
     "build": "tsc",
+    "postbuild": "node \"./scripts/prepublish.js\"",
     "prepare": "npm run build",
     "test": "ts-node --project ./tsconfig.spec.json node_modules/jasmine/bin/jasmine lib/**/*.spec.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tom-odb/angular_builders.git"
+    "url": "git+https://github.com/studiohyperdrive/angular_builders.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tom-odb/angular_builders/issues"
+    "url": "https://github.com/studiohyperdrive/angular_builders/issues"
   },
-  "homepage": "https://github.com/tom-odb/angular_builders#readme",
+  "homepage": "https://github.com/studiohyperdrive/angular_builders#readme",
   "dependencies": {
     "@angular-devkit/architect": "0.900.6",
     "@angular-devkit/build-ng-packagr": "0.900.6",
-    "@tom-odb/named-exports": "^1.4.6",
+    "@studiohyperdrive/named-exports": "^2.0.4",
     "@types/cross-spawn": "^6.0.1",
     "cross-spawn": "^7.0.1",
     "glob": "^7.1.6",
@@ -46,6 +48,7 @@
   "devDependencies": {
     "@types/jasmine": "^3.3.12",
     "@types/node": "^11.13.4",
+    "cpx": "^1.5.0",
     "jasmine": "^3.4.0",
     "jasmine-node": "^3.0.0",
     "rxjs": "6.5.4",
