@@ -5,7 +5,7 @@ metadata:
   description: Angular Builders
   tags:
     - gitops
-		- angular
+    - angular
 spec:
   type: service
   lifecycle: production
