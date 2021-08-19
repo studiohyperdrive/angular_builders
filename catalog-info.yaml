@@ -6,9 +6,9 @@ metadata:
   tags:
     - gitops
     - angular
-	annotations:
-		google.com/drive-id: 0ACGdP2rgKAk2Uk9PVA
-		google.com/drive-root-id: 1ylG3tEaHfO94SVRr5nkg6AIW4JNFZ8co
+  annotations:
+    google.com/drive-id: 0ACGdP2rgKAk2Uk9PVA
+    google.com/drive-root-id: 1ylG3tEaHfO94SVRr5nkg6AIW4JNFZ8co
 spec:
   type: service
   lifecycle: production
